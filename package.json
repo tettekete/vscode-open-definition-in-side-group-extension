@@ -1,6 +1,6 @@
 {
-  "name": "show-define-by-side",
-  "displayName": "show define by side",
+  "name": "open-definition-in-side-group",
+  "displayName": "Open Definition in Side Group",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -9,13 +9,49 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "open-definition-in-side-group", 
+      "properties": {
+        "open-definition-in-side-group.allowViewColumns": {
+          "type": "string",
+          "description": "A list of tab group numbers allowed to display definitions.",
+          "default": "1,2",
+          "pattern": "[1-9](?:,[1-9]+)*",
+          "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
+        }
+      }
+    },
     "commands": [
       {
-        "command": "show-define-by-side.helloWorld",
-        "title": "Hello World"
+        "command": "open-definition-in-side-group.openDefinitionInSidePane",
+        "title": "Go to Definition",
+        "category": "ShowDefinitionsOnTheSide"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "open-definition-in-side-group.editor-context.submenu",
+          "when": "editorFocus",
+          "group": "navigation"
+        }
+      ],
+      "open-definition-in-side-group.editor-context.submenu":[
+        {
+          "command": "open-definition-in-side-group.openDefinitionInSidePane"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "open-definition-in-side-group.editor-context.submenu",
+        "label": "Open in Side Group"
       }
     ]
   },
