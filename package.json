@@ -31,7 +31,27 @@
       {
         "command": "open-definition-in-side-group.openDefinitionInSidePane",
         "title": "Go to Definition",
-        "category": "ShowDefinitionsOnTheSide"
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "open-definition-in-side-group.openTypeDefinitionInSidePane",
+        "title": "Go to Type Definition",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "open-definition-in-side-group.openDeclarationInSidePane",
+        "title": "Go to Source Definition",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "open-definition-in-side-group.openImplementationInSidePane",
+        "title": "Go to Implementations",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "open-definition-in-side-group.openReferenceInSidePane",
+        "title": "Go to References",
+        "category": "OpenDefinitionInSideGroup"
       }
     ],
     "menus": {
@@ -44,7 +64,24 @@
       ],
       "open-definition-in-side-group.editor-context.submenu":[
         {
-          "command": "open-definition-in-side-group.openDefinitionInSidePane"
+          "command": "open-definition-in-side-group.openDefinitionInSidePane",
+          "group": "order@1"
+        },
+        {
+          "command": "open-definition-in-side-group.openTypeDefinitionInSidePane",
+          "group": "order@2"
+        },
+        {
+          "command": "open-definition-in-side-group.openDeclarationInSidePane",
+          "group": "order@3"
+        },
+        {
+          "command": "open-definition-in-side-group.openImplementationInSidePane",
+          "group": "order@4"
+        },
+        {
+          "command": "open-definition-in-side-group.openReferenceInSidePane",
+          "group": "order@5"
         }
       ]
     },
