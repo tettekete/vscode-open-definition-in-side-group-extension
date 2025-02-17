@@ -9,6 +9,8 @@ import {
 	kCmdExecuteReferenceProvider
 } from './constants';
 
+import { HightLightBox } from './lib/hight-light-box';
+
 export function activate(context: vscode.ExtensionContext) {
 
 
@@ -58,6 +60,14 @@ export function activate(context: vscode.ExtensionContext) {
 		{
 			openDefinitionInSidePane( kCmdExecuteReferenceProvider );
 		}
+	);
+
+	vscode.window.onDidChangeTextEditorSelection( ( event ) =>
+		{
+			HightLightBox.disposeIfSameEditor( event.textEditor );
+		}
+		,null
+		,context.subscriptions
 	);
 
 	context.subscriptions.push(
