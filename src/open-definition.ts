@@ -93,20 +93,6 @@ export async function openDefinitionInSidePane( providerCommand: ValidProviderCo
 			);
 		defineEditor.selection = newSelection;
 
-		/*
-			The onDidChangeTextEditorSelection event is fired when the UI is actually
-			updated, not when there is a change in TextEditor.selection.
-
-			Therefore, even if the highlight box is displayed here, the event is fired
-			afterwards and disposes of it immediately.
-
-			Even if I wait until defineEditor.selection === newSelection, it has no
-			effect, so I sleep as a desperate measure.
-
-			On a slow machine, the highlight box may disappear immediately.
-		*/
-		await sleep(0.1);
-
 		// Show HightLightBox
 		HightLightBox.show({
 			editor: defineEditor,

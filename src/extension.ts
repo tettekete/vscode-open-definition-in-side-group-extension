@@ -64,7 +64,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	vscode.window.onDidChangeTextEditorSelection( ( event ) =>
 		{
-			HightLightBox.disposeIfSameEditor( event.textEditor );
+			if( ! HightLightBox.isFreshBox() )
+			{
+				HightLightBox.disposeIfSameEditor( event.textEditor );
+			}
 		}
 		,null
 		,context.subscriptions

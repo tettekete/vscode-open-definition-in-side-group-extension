@@ -5,6 +5,7 @@ export class HightLightBox
 	static #textEditorDecoration:vscode.TextEditorDecorationType | undefined;
 	static #timeOut: NodeJS.Timeout;
 	static #displayEditor: vscode.TextEditor | undefined;
+	static #showTime: number = 0;
 
 	static dispose()
 	{
@@ -15,6 +16,7 @@ export class HightLightBox
 
 		clearTimeout( HightLightBox.#timeOut );
 		HightLightBox.#displayEditor = undefined;
+		HightLightBox.#showTime = 0;
 	}
 
 
@@ -50,7 +52,7 @@ export class HightLightBox
 			opacityDelta?: number;
 			autoPartialLine?: boolean
 		}
-		)
+	)
 	{
 		HightLightBox.dispose();
 
@@ -101,6 +103,44 @@ export class HightLightBox
 		
 	}
 
+	
+	/**
+	 * A method prepared to determine whether the onDidChangeTextEditorSelection
+	 * event should execute disposeIfSameEditor.
+	 *
+	 * The onDidChangeTextEditorSelection event is fired when the UI is actually
+	 * updated, not when there is a change in TextEditor.selection.
+	 * 
+	 * In other words, even if you perform the display processing for the HightLightBox
+	 * immediately after updating TextEditor.selection, the cursor movement event
+	 * will occur in the UI update immediately after that, and the HightLightBox
+	 * will disappear immediately.
+	 * 
+	 * By returning whether the HightLightBox is fresh or not, you can determine
+	 * whether to call disposeIfSameEditor() in the event callback.
+	 * 
+	 *
+	 * @static
+	 * @returns {boolean} 
+	 */
+	static isFreshBox()
+	{
+		if( Date.now() - HightLightBox.#showTime > 100 )
+		{
+			HightLightBox.#showTime = 0;
+		}
+
+		if( ! HightLightBox.#showTime )
+		{
+			return false;
+		}
+
+		HightLightBox.#showTime = 0;
+
+		return true;
+	}
+
+
 	private static _showHightLightBox(
 		{
 			editor,
@@ -122,6 +162,7 @@ export class HightLightBox
 		);
 
 		HightLightBox._setDecorations( editor , range , highlightBox );
+		HightLightBox.#showTime = Date.now();
 	}
 
 
@@ -179,6 +220,8 @@ export class HightLightBox
 			}	
 		};
 
+		HightLightBox.#showTime = Date.now();
+		
 		transition();
 	}
 
