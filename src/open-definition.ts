@@ -6,19 +6,9 @@ import type { ValidProviderCommands } from './constants';
 import { HightLightBox } from './lib/hight-light-box';
 import { sleep } from './lib/sleep';
 
-type LocationOrLocationLink = vscode.Location | vscode.LocationLink;
+import type { LocationOrLocationLink } from './lib/location-or-location-link';
+import { getUriRangeFromLocationOrLocationLink } from './lib/location-or-location-link';
 
-function isVSCLocation( location: LocationOrLocationLink ): location is vscode.Location
-{
-	return Object.hasOwn( location , 'range' )
-			&& Object.hasOwn( location , 'uri' );
-}
-
-function isVSCLocationLink( location: LocationOrLocationLink ): location is vscode.LocationLink
-{
-	return Object.hasOwn( location , 'targetRange' )
-			&& Object.hasOwn( location , 'targetUri' );
-}
 
 export async function openDefinitionInSidePane( providerCommand: ValidProviderCommands ):Promise<boolean>
 {
@@ -36,29 +26,19 @@ export async function openDefinitionInSidePane( providerCommand: ValidProviderCo
 		return false;
 	}
 
-	
-	let theUri: vscode.Uri;
-	let theRange: vscode.Range;
-
-	if( isVSCLocation( locations[0] ) )
 	{
-		theUri		= locations[0].uri;
-		theRange	= locations[0].range;
 	}
-	else if( isVSCLocationLink( locations[0] ) )
 	{
-		theUri		= locations[0].targetUri;
-		theRange	= locations[0].targetRange;
-	}
-	else
-	{
-		return false;
 	}
 
 	const targetViewColumn = getViewColumnForOpen();
 
 	console.debug(`targetViewColumn: ${targetViewColumn}`);
 	console.debug(`theUri: ${theUri}`);
+	
+	const r = getUriRangeFromLocationOrLocationLink( locations[0] );
+	let theUri: vscode.Uri = r.uri;
+	let theRange: vscode.Range = r.range;
 
 	await vscode.commands.executeCommand(
 		'vscode.open',
