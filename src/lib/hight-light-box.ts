@@ -105,6 +105,15 @@ export class HightLightBox
 
 	
 	/**
+	 * It was found that the following problem does not occur if “vscode.window.showTextDocument”
+	 * is executed with `await` instead of the built-in command “vscode.open”.
+	 * 
+	 * Therefore, this method is not currently used.
+	 *
+	 * However, it will be left for a while with a comment to preserve historical reasons.
+	 *
+	 * -----
+	 *
 	 * A method prepared to determine whether the onDidChangeTextEditorSelection
 	 * event should execute disposeIfSameEditor.
 	 *

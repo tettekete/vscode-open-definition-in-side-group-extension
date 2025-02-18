@@ -61,12 +61,10 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	// Register event listeners to hide the HighlightBox on click or cursor position change.
 	vscode.window.onDidChangeTextEditorSelection( ( event ) =>
 		{
-			if( ! HightLightBox.isFreshBox() )
-			{
-				HightLightBox.disposeIfSameEditor( event.textEditor );
-			}
+			HightLightBox.disposeIfSameEditor( event.textEditor );
 		}
 		,null
 		,context.subscriptions

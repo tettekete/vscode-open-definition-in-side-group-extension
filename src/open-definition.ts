@@ -10,7 +10,6 @@ import { HightLightBox } from './lib/hight-light-box';
 
 import type { LocationOrLocationLink } from './lib/location-or-location-link';
 import { getUriRangeFromLocationOrLocationLink } from './lib/location-or-location-link';
-import { getLocationTextEntries } from './lib/get-location-text-entries';
 import path from 'node:path';
 
 
@@ -47,31 +46,19 @@ export async function openDefinitionInSidePane( providerCommand: ValidProviderCo
 	let theUri: vscode.Uri = r.uri;
 	let theRange: vscode.Range = r.range;
 
-	await vscode.commands.executeCommand(
-		'vscode.open',
+	const cursorPosRange = new vscode.Range( theRange.start, theRange.start );
+	await vscode.window.showTextDocument(
 		theUri,
 		{
-			viewColumn: targetViewColumn
+			viewColumn: targetViewColumn,
+			selection: cursorPosRange,
 		}
 	);
-
 
 	// Scroll to definition pos
 	const defineEditor = getActiveTextEditorForTabGroup( openedViewColumn );
 	if( defineEditor )
 	{
-		// set cursor pos
-		defineEditor.revealRange(
-			theRange,
-			vscode.TextEditorRevealType.Default
-		);
-
-		const newSelection = new vscode.Selection(
-				theRange.start,
-				theRange.start
-			);
-		defineEditor.selection = newSelection;
-
 		// Show HightLightBox
 		HightLightBox.show({
 			editor: defineEditor,
