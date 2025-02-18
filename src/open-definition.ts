@@ -99,11 +99,14 @@ async function navigateWithQuickPick(
 	}
 )
 {
-	const locationTextEntries = await getLocationTextEntries( locations );
-
 	const qpItems:RefQuicPickItem[] = [];
 
-	for( const entry of locationTextEntries )
+	const uriRangeList = locations.map((location) =>
+	{
+		return getUriRangeFromLocationOrLocationLink( location )
+	});
+	
+	for( const entry of uriRangeList )
 	{
 		const workspaceFolder = findWorkspaceFolder( entry.uri.fsPath );
 		let relPath:string;
