@@ -3,6 +3,13 @@ import * as vscode from 'vscode';
 import { VSCConfig } from './vsc-config';
 import { intersection } from './utils';
 
+let lastResolvedNo = 0;
+
+export function resetLastResolvedNo()
+{
+	lastResolvedNo = 0;
+}
+
 export function getViewColumnForOpen():vscode.ViewColumn
 {
 	// get displayed columns
@@ -44,11 +51,19 @@ export function getViewColumnForOpen():vscode.ViewColumn
 	// Determine which columns should be displayed
 	const candidateColumns = [...intersectViews].sort( (a:number,b:number) => a - b );
 	let resolvedNo = 0;
+	let baseViewColumn = activeViewColumn;
+
+	if( lastResolvedNo && ! candidateColumns.includes( activeViewColumn ))
+	{
+		baseViewColumn = lastResolvedNo;
+	}
+
 	for(const candidateColumnNo of candidateColumns )
 	{
-		if( activeViewColumn < candidateColumnNo )
+		if( baseViewColumn < candidateColumnNo )
 		{
-			resolvedNo = candidateColumnNo;
+			lastResolvedNo = candidateColumnNo;
+			return candidateColumnNo;
 		}
 	}
 
@@ -57,5 +72,6 @@ export function getViewColumnForOpen():vscode.ViewColumn
 		resolvedNo = candidateColumns[0];
 	}
 
+	lastResolvedNo = resolvedNo;
 	return resolvedNo;
 }

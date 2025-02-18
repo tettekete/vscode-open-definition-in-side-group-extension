@@ -10,6 +10,7 @@ import {
 } from './constants';
 
 import { HightLightBox } from './lib/hight-light-box';
+import { resetLastResolvedNo } from './lib/decide-view-column';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -89,13 +90,23 @@ export function activate(context: vscode.ExtensionContext) {
 		,context.subscriptions
 	);
 
+	// reset last resolved viewColumn No.
+	const configChangedListener = vscode.workspace.onDidChangeConfiguration((event)=>
+	{
+		if( event.affectsConfiguration('open-definition-in-side-group.allowViewColumns') )
+		{
+			resetLastResolvedNo();
+		}
+	});
+
 	context.subscriptions.push(
 		openDefinition,
 		openTypeDefinition,
 		openDeclaration,
 		openImplementation,
 		openReference,
-		showViewColumn
+		showViewColumn,
+		configChangedListener
 	);
 }
 
