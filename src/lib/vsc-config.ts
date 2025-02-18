@@ -18,7 +18,7 @@ export class VSCConfig
 		}
 
 		const config = VSCConfig._stringConfig(
-			'show-definitions-on-the-side.allowViewColumns'
+			'open-definition-in-side-group.allowViewColumns'
 		);
 
 		if( config === undefined )
