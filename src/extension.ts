@@ -61,6 +61,25 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	const showViewColumn = vscode.commands.registerCommand(
+		'open-definition-in-side-group.showViewColumn',
+		() =>
+		{
+			const editor = vscode.window.activeTextEditor;
+			let message = '';
+			if(! editor )
+			{
+				message = 'There are no active text editor.';
+			}
+			else
+			{
+				message = `viewColumn is ${editor.viewColumn}`;
+			}
+
+			vscode.window.setStatusBarMessage( message , 5000 );
+		}
+	);
+
 	// Register event listeners to hide the HighlightBox on click or cursor position change.
 	vscode.window.onDidChangeTextEditorSelection( ( event ) =>
 		{
@@ -75,7 +94,8 @@ export function activate(context: vscode.ExtensionContext) {
 		openTypeDefinition,
 		openDeclaration,
 		openImplementation,
-		openReference
+		openReference,
+		showViewColumn
 	);
 }
 

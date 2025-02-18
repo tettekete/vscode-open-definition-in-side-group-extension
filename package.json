@@ -52,6 +52,11 @@
         "command": "open-definition-in-side-group.openReferenceInSidePane",
         "title": "Go to References",
         "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "open-definition-in-side-group.showViewColumn",
+        "title": "Show viewColumn number.",
+        "category": "OpenDefinitionInSideGroup"
       }
     ],
     "menus": {
