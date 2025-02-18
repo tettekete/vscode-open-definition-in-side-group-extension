@@ -13,7 +13,6 @@ import { HightLightBox } from './lib/hight-light-box';
 
 export function activate(context: vscode.ExtensionContext) {
 
-
 	// Go to Definition
 	const openDefinition = vscode.commands.registerCommand(
 		'open-definition-in-side-group.openDefinitionInSidePane',

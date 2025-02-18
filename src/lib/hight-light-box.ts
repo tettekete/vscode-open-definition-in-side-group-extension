@@ -216,7 +216,7 @@ export class HightLightBox
 			}
 			else
 			{
-				HightLightBox.#timeOut = setTimeout( ()=>{transition(true)} , interval );
+				HightLightBox.#timeOut = setTimeout( ()=>{transition(true);} , interval );
 			}	
 		};
 
