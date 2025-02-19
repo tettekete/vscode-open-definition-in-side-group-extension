@@ -153,13 +153,24 @@ async function navigateWithQuickPick(
 }
 
 
-function previewLocation( viewColumn:vscode.ViewColumn , refQPItem: RefQuicPickItem )
+async function previewLocation( viewColumn:vscode.ViewColumn , refQPItem: RefQuicPickItem )
 {
-	vscode.window.showTextDocument( refQPItem.uri ,
+	const cursorRange = new vscode.Range( refQPItem.range.start , refQPItem.range.start );
+	await vscode.window.showTextDocument( refQPItem.uri ,
 	{
 		viewColumn,
-		selection: refQPItem.range,
+		selection: cursorRange,
 		preview: true,
 		preserveFocus: true
 	});
+
+	const defineEditor = getActiveTextEditorForTabGroup( viewColumn );
+	if( defineEditor )
+	{
+		// Show HightLightBox
+		HightLightBox.show({
+			editor: defineEditor,
+			range: refQPItem.range
+		});
+	}
 }
