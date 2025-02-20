@@ -90,7 +90,7 @@ async function navigateWithQuickPick(
 
 	const uriRangeList = locations.map((location) =>
 	{
-		return getUriRangeFromLocationOrLocationLink( location )
+		return getUriRangeFromLocationOrLocationLink( location );
 	});
 	
 	for( const entry of uriRangeList )
