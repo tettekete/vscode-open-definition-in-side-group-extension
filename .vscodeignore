@@ -12,3 +12,7 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 **/.vscode-test.*
+_untrack/**
+docs/**
+!docs/images/open-definition-in-side-group-icon.png
+!docs/README.ja.md

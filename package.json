@@ -1,14 +1,23 @@
 {
   "name": "open-definition-in-side-group",
   "displayName": "Open Definition in Side Group",
-  "version": "0.0.1",
   "description": "%extension.description%",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.97.0"
   },
   "categories": [
     "Other"
   ],
+  "publisher": "tettekete",
+  "author": "tettekete",
+  "license": "MIT",
+  "icon": "docs/images/open-definition-in-side-group-icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tettekete/vscode-open-definition-in-side-group-extension"
+  },
+  "homepage": "https://tettekete.github.io/vscode-open-definition-in-side-group-extension/",
   "activationEvents": [
     "onStartupFinished"
   ],
