@@ -49,21 +49,37 @@ export function getViewColumnForOpen():vscode.ViewColumn
 
 	// ----
 	// Determine which columns should be displayed
-	const candidateColumns = [...intersectViews].sort( (a:number,b:number) => a - b );
-	let resolvedNo = 0;
-	let baseViewColumn = activeViewColumn;
+	let candidateColumns: number[] = [];
 
-	if( lastResolvedNo && ! candidateColumns.includes( activeViewColumn ))
+	// Narrowing down the candidate view
+	const tasks = [
+		()=>{return [...intersectViews].sort( (a:number,b:number) => a - b );},
+		()=>{return candidateColumns.filter( no => no !== activeViewColumn );},
+		()=>{return candidateColumns.filter( no => no !== lastResolvedNo );},
+	];
+
+	for(const task of tasks )
+	{
+		candidateColumns = task();
+		if( candidateColumns.length === 1 )
+		{
+			return lastResolvedNo = candidateColumns[0];
+		}
+	}
+
+	// Determine the next view for display based on either lastResolvedNo or activeViewColumn.
+	let baseViewColumn = activeViewColumn;
+	if( lastResolvedNo )
 	{
 		baseViewColumn = lastResolvedNo;
 	}
 
+	let resolvedNo = 0;
 	for(const candidateColumnNo of candidateColumns )
 	{
 		if( baseViewColumn < candidateColumnNo )
 		{
-			lastResolvedNo = candidateColumnNo;
-			return candidateColumnNo;
+			return lastResolvedNo = candidateColumnNo;;
 		}
 	}
 
@@ -72,6 +88,5 @@ export function getViewColumnForOpen():vscode.ViewColumn
 		resolvedNo = candidateColumns[0];
 	}
 
-	lastResolvedNo = resolvedNo;
-	return resolvedNo;
+	return lastResolvedNo = resolvedNo;
 }

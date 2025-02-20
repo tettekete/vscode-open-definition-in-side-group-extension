@@ -21,7 +21,7 @@
         "open-definition-in-side-group.allowViewColumns": {
           "type": "string",
           "description": "A list of tab group numbers allowed to display definitions.",
-          "default": "1,2",
+          "default": "1,2,3",
           "pattern": "[1-9](?:,[1-9]+)*",
           "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
         }
