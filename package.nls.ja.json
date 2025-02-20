@@ -1,0 +1,10 @@
+{
+	"command.go_to_definition": "定義へ移動",
+	"command.go_to_type_definition": "型定義へ移動",
+	"command.go_to_source_definition": "ソース定義に移動",
+	"command.go_to_implementations": "実装へ移動",
+	"command.go_to_references": "参照へ移動",
+	"command.show_view_column_number": "アクティブエディタの viewColumn 番号を確認する",
+	"submenus.open_in_side_group": "隣で開く",
+	"extension.description": "「定義へ移動」や「型定義へ移」などを異なるタググループで開くためのメニューアイテムを提供する機能拡張です。"
+}

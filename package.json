@@ -1,8 +1,8 @@
 {
   "name": "open-definition-in-side-group",
   "displayName": "Open Definition in Side Group",
-  "description": "",
   "version": "0.0.1",
+  "description": "%extension.description%",
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -16,7 +16,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "open-definition-in-side-group", 
+      "title": "Open Definition in Side Group", 
       "properties": {
         "open-definition-in-side-group.allowViewColumns": {
           "type": "string",
@@ -30,32 +30,32 @@
     "commands": [
       {
         "command": "open-definition-in-side-group.openDefinitionInSidePane",
-        "title": "Go to Definition",
+        "title": "%command.go_to_definition%",
         "category": "OpenDefinitionInSideGroup"
       },
       {
         "command": "open-definition-in-side-group.openTypeDefinitionInSidePane",
-        "title": "Go to Type Definition",
+        "title": "%command.go_to_type_definition%",
         "category": "OpenDefinitionInSideGroup"
       },
       {
         "command": "open-definition-in-side-group.openDeclarationInSidePane",
-        "title": "Go to Source Definition",
+        "title": "%command.go_to_source_definition%",
         "category": "OpenDefinitionInSideGroup"
       },
       {
         "command": "open-definition-in-side-group.openImplementationInSidePane",
-        "title": "Go to Implementations",
+        "title": "%command.go_to_implementations%",
         "category": "OpenDefinitionInSideGroup"
       },
       {
         "command": "open-definition-in-side-group.openReferenceInSidePane",
-        "title": "Go to References",
+        "title": "%command.go_to_references%",
         "category": "OpenDefinitionInSideGroup"
       },
       {
         "command": "open-definition-in-side-group.showViewColumn",
-        "title": "Show viewColumn number.",
+        "title": "Show viewColumn number",
         "category": "OpenDefinitionInSideGroup"
       }
     ],
@@ -65,6 +65,31 @@
           "submenu": "open-definition-in-side-group.editor-context.submenu",
           "when": "editorFocus",
           "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "open-definition-in-side-group.openDefinitionInSidePane",
+          "when": "editorFocus"
+        },
+        {
+          "command": "open-definition-in-side-group.openTypeDefinitionInSidePane",
+          "when": "editorFocus"
+        },
+        {
+          "command": "open-definition-in-side-group.openDeclarationInSidePane",
+          "when": "editorFocus"
+        },
+        {
+          "command": "open-definition-in-side-group.openImplementationInSidePane",
+          "when": "editorFocus"
+        },
+        {
+          "command": "open-definition-in-side-group.openReferenceInSidePane",
+          "when": "editorFocus"
+        },
+        {
+          "command": "open-definition-in-side-group.showViewColumn"
         }
       ],
       "open-definition-in-side-group.editor-context.submenu":[
@@ -93,7 +118,7 @@
     "submenus": [
       {
         "id": "open-definition-in-side-group.editor-context.submenu",
-        "label": "Open in Side Group"
+        "label": "%submenus.open_in_side_group%"
       }
     ]
   },
