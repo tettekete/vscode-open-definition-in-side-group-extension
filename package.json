@@ -72,30 +72,24 @@
       "editor/context": [
         {
           "submenu": "open-definition-in-side-group.editor-context.submenu",
-          "when": "editorFocus",
           "group": "navigation"
         }
       ],
       "commandPalette": [
         {
-          "command": "open-definition-in-side-group.openDefinitionInSidePane",
-          "when": "editorFocus"
+          "command": "open-definition-in-side-group.openDefinitionInSidePane"
         },
         {
-          "command": "open-definition-in-side-group.openTypeDefinitionInSidePane",
-          "when": "editorFocus"
+          "command": "open-definition-in-side-group.openTypeDefinitionInSidePane"
         },
         {
-          "command": "open-definition-in-side-group.openDeclarationInSidePane",
-          "when": "editorFocus"
+          "command": "open-definition-in-side-group.openDeclarationInSidePane"
         },
         {
-          "command": "open-definition-in-side-group.openImplementationInSidePane",
-          "when": "editorFocus"
+          "command": "open-definition-in-side-group.openImplementationInSidePane"
         },
         {
-          "command": "open-definition-in-side-group.openReferenceInSidePane",
-          "when": "editorFocus"
+          "command": "open-definition-in-side-group.openReferenceInSidePane"
         },
         {
           "command": "open-definition-in-side-group.showViewColumn"
