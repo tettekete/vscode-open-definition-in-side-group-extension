@@ -7,6 +7,13 @@
 - [コンフィグ項目](#コンフィグ項目)
 	- [`Allow View Columns`](#allow-view-columns)
 		- [`viewColumn` 番号の確認方法](#viewcolumn-番号の確認方法)
+	- [利用可能なコマンド(ショートカット設定向け)](#利用可能なコマンドショートカット設定向け)
+		- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
+		- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
+		- [`OpenDefinitionInSideGroup: Go to Source Definition`](#opendefinitioninsidegroup-go-to-source-definition)
+		- [`OpenDefinitionInSideGroup: Go to Implementations`](#opendefinitioninsidegroup-go-to-implementations)
+		- [`OpenDefinitionInSideGroup: Go to References`](#opendefinitioninsidegroup-go-to-references)
+		- [`OpenDefinitionInSideGroup: Show viewColumn number`](#opendefinitioninsidegroup-show-viewcolumn-number)
 - [既知の問題](#既知の問題)
 	- [`ソース定義に移動` の挙動](#ソース定義に移動-の挙動)
 	- [プログラミング言語以外でも `隣で開く` サブメニューが表示される問題](#プログラミング言語以外でも-隣で開く-サブメニューが表示される問題)
@@ -19,8 +26,10 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 
 本機能拡張は「隣」のタググループで「定義」を開くための機能拡張です。
 
-
 [^1]: 本ドキュメントでは単にペインと呼ぶ場合があります。
+
+![demo](https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/demo.gif)
+
 
 
 ## 使用方法
@@ -28,6 +37,8 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 インストールすると関数や型の上で開いたコンテキストメニューにサブメニュー `隣で開く` が追加されます。
 
 あとはその中の `定義へ移動` や `型定義へ移動` などを選ぶだけです。
+
+<img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png 2x" width="420">
 
 
 # コンフィグ項目
@@ -48,6 +59,52 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 ### `viewColumn` 番号の確認方法
 
 コマンドパレットで `OpenDefinitionInSideGroup: Check the viewColumn number of the active editor` を選ぶとステータスバーにアクティブなエディターの `viewColumn` 番号を一定時間表示します。
+
+
+## 利用可能なコマンド(ショートカット設定向け)
+
+### `OpenDefinitionInSideGroup: Go to Definition`
+
+**コマンドID**: `open-definition-in-side-group.openDefinitionInSidePane`
+
+シンボルの定義を検索し、ジャンプします。
+検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
+
+
+### `OpenDefinitionInSideGroup: Go to Type Definition`
+
+**コマンドID**: `open-definition-in-side-group.openTypeDefinitionInSidePane`
+
+シンボルの型定義（`interface` など）にジャンプします。
+検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
+
+### `OpenDefinitionInSideGroup: Go to Source Definition`
+
+**コマンドID**: `open-definition-in-side-group.openDeclarationInSidePane`
+
+通常、シンボルの定義を検索し、ジャンプします。（_既知の問題の[`ソース定義に移動` の挙動](#ソース定義に移動-の挙動)を参照して下さい_）
+検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
+
+
+### `OpenDefinitionInSideGroup: Go to Implementations`
+
+**コマンドID**: `open-definition-in-side-group.openImplementationInSidePane`
+
+抽象クラスやインターフェースの実装クラスへジャンプします。
+検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
+
+### `OpenDefinitionInSideGroup: Go to References`
+
+コマンドID: `open-definition-in-side-group.openReferenceInSidePane`
+
+シンボルの参照元（使用箇所）を検索しジャンプします。
+検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
+
+### `OpenDefinitionInSideGroup: Show viewColumn number`
+
+**コマンドID**: `open-definition-in-side-group.showViewColumn`
+
+アクティブエディタの `viewColumn` 番号をステータスバーに一定時間表示します。
 
 
 # 既知の問題
