@@ -1,3 +1,6 @@
+
+<p align="center">English / <a href="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/README.ja.html">日本語</a></p>
+
 **Table of Contents**
 
 - [Overview](#overview)
@@ -5,13 +8,13 @@
 - [Configuration Options](#configuration-options)
 	- [`Allow View Columns`](#allow-view-columns)
 		- [How to Check `viewColumn` Numbers](#how-to-check-viewcolumn-numbers)
-	- [Available Commands (For Shortcut Configuration)](#available-commands-for-shortcut-configuration)
-		- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
-		- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
-		- [`OpenDefinitionInSideGroup: Go to Source Definition`](#opendefinitioninsidegroup-go-to-source-definition)
-		- [`OpenDefinitionInSideGroup: Go to Implementations`](#opendefinitioninsidegroup-go-to-implementations)
-		- [`OpenDefinitionInSideGroup: Go to References`](#opendefinitioninsidegroup-go-to-references)
-		- [`OpenDefinitionInSideGroup: Show viewColumn number`](#opendefinitioninsidegroup-show-viewcolumn-number)
+- [Available Commands (For Shortcut Configuration)](#available-commands-for-shortcut-configuration)
+	- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
+	- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
+	- [`OpenDefinitionInSideGroup: Go to Source Definition`](#opendefinitioninsidegroup-go-to-source-definition)
+	- [`OpenDefinitionInSideGroup: Go to Implementations`](#opendefinitioninsidegroup-go-to-implementations)
+	- [`OpenDefinitionInSideGroup: Go to References`](#opendefinitioninsidegroup-go-to-references)
+	- [`OpenDefinitionInSideGroup: Show viewColumn number`](#opendefinitioninsidegroup-show-viewcolumn-number)
 - [Known Issues](#known-issues)
 	- [Behavior of `Go to Source Definition`](#behavior-of-go-to-source-definition)
 	- [`Open in Side Group` Submenu Appearing in Non-Programming Languages](#open-in-side-group-submenu-appearing-in-non-programming-languages)
@@ -57,9 +60,9 @@ Alternatively, setting it to `2,3` will attempt to alternate between the second 
 You can check the `viewColumn` number of the active editor by running the command `OpenDefinitionInSideGroup: Check the viewColumn number of the active editor` from the command palette. The `viewColumn` number will be displayed in the status bar for a short period.
 
 
-## Available Commands (For Shortcut Configuration)
+# Available Commands (For Shortcut Configuration)
 
-### `OpenDefinitionInSideGroup: Go to Definition`
+## `OpenDefinitionInSideGroup: Go to Definition`
 
 Command ID: `open-definition-in-side-group.openDefinitionInSidePane`
 
@@ -67,14 +70,14 @@ Searches for the definition of a symbol and jumps to it.
 If multiple results are found, you can preview and select the destination via the QuickPick menu.
 
 
-### `OpenDefinitionInSideGroup: Go to Type Definition`
+## `OpenDefinitionInSideGroup: Go to Type Definition`
 
 **Command ID**: `open-definition-in-side-group.openTypeDefinitionInSidePane`
 
 Jumps to the type definition of a symbol (such as `interface`).
 If multiple results are found, you can preview and select the destination via the QuickPick menu.
 
-### `OpenDefinitionInSideGroup: Go to Source Definition`
+## `OpenDefinitionInSideGroup: Go to Source Definition`
 
 **Command ID**: `open-definition-in-side-group.openDeclarationInSidePane`
 
@@ -82,21 +85,21 @@ Normally searches for and jumps to the definition of a symbol. (_See the known i
 If multiple results are found, you can preview and select the destination via the QuickPick menu.
 
 
-### `OpenDefinitionInSideGroup: Go to Implementations`
+## `OpenDefinitionInSideGroup: Go to Implementations`
 
 **Command ID**: `open-definition-in-side-group.openImplementationInSidePane`
 
 Jumps to the implementation classes of abstract classes or interfaces.
 If multiple results are found, you can preview and select the destination via the QuickPick menu.
 
-### `OpenDefinitionInSideGroup: Go to References`
+## `OpenDefinitionInSideGroup: Go to References`
 
 **Command ID**: `open-definition-in-side-group.openReferenceInSidePane`
 
 Searches for and jumps to the references (usages) of a symbol.
 If multiple results are found, you can preview and select the destination via the QuickPick menu.
 
-### `OpenDefinitionInSideGroup: Show viewColumn number`
+## `OpenDefinitionInSideGroup: Show viewColumn number`
 
 **Command ID**: `open-definition-in-side-group.showViewColumn`
 
@@ -119,4 +122,4 @@ After considering the trade-offs, we decided that ensuring the `Open in Side Gro
 
 Thus, this behavior is intentional and considered part of the extension's design.
 
-[^2]: The primary reason for this instability is that when switching editors, the language server may not have finished its analysis yet, leading to incorrect detection of definition availability.
+[^2]: This is because, immediately after the editor has been switched, the analysis process by the language server has not yet finished, and in many cases, "no definition" is returned even though there is a definition.

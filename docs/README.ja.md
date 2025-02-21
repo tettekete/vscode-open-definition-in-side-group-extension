@@ -1,4 +1,5 @@
 
+<p align="center"><a href="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/">English</a> / 日本語</p>
 
 **目次**
 
@@ -7,13 +8,13 @@
 - [コンフィグ項目](#コンフィグ項目)
 	- [`Allow View Columns`](#allow-view-columns)
 		- [`viewColumn` 番号の確認方法](#viewcolumn-番号の確認方法)
-	- [利用可能なコマンド(ショートカット設定向け)](#利用可能なコマンドショートカット設定向け)
-		- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
-		- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
-		- [`OpenDefinitionInSideGroup: Go to Source Definition`](#opendefinitioninsidegroup-go-to-source-definition)
-		- [`OpenDefinitionInSideGroup: Go to Implementations`](#opendefinitioninsidegroup-go-to-implementations)
-		- [`OpenDefinitionInSideGroup: Go to References`](#opendefinitioninsidegroup-go-to-references)
-		- [`OpenDefinitionInSideGroup: Show viewColumn number`](#opendefinitioninsidegroup-show-viewcolumn-number)
+- [利用可能なコマンド(ショートカット設定向け)](#利用可能なコマンドショートカット設定向け)
+	- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
+	- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
+	- [`OpenDefinitionInSideGroup: Go to Source Definition`](#opendefinitioninsidegroup-go-to-source-definition)
+	- [`OpenDefinitionInSideGroup: Go to Implementations`](#opendefinitioninsidegroup-go-to-implementations)
+	- [`OpenDefinitionInSideGroup: Go to References`](#opendefinitioninsidegroup-go-to-references)
+	- [`OpenDefinitionInSideGroup: Show viewColumn number`](#opendefinitioninsidegroup-show-viewcolumn-number)
 - [既知の問題](#既知の問題)
 	- [`ソース定義に移動` の挙動](#ソース定義に移動-の挙動)
 	- [プログラミング言語以外でも `隣で開く` サブメニューが表示される問題](#プログラミング言語以外でも-隣で開く-サブメニューが表示される問題)
@@ -61,9 +62,9 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 コマンドパレットで `OpenDefinitionInSideGroup: Check the viewColumn number of the active editor` を選ぶとステータスバーにアクティブなエディターの `viewColumn` 番号を一定時間表示します。
 
 
-## 利用可能なコマンド(ショートカット設定向け)
+# 利用可能なコマンド(ショートカット設定向け)
 
-### `OpenDefinitionInSideGroup: Go to Definition`
+## `OpenDefinitionInSideGroup: Go to Definition`
 
 **コマンドID**: `open-definition-in-side-group.openDefinitionInSidePane`
 
@@ -71,14 +72,14 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
 
 
-### `OpenDefinitionInSideGroup: Go to Type Definition`
+## `OpenDefinitionInSideGroup: Go to Type Definition`
 
 **コマンドID**: `open-definition-in-side-group.openTypeDefinitionInSidePane`
 
 シンボルの型定義（`interface` など）にジャンプします。
 検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
 
-### `OpenDefinitionInSideGroup: Go to Source Definition`
+## `OpenDefinitionInSideGroup: Go to Source Definition`
 
 **コマンドID**: `open-definition-in-side-group.openDeclarationInSidePane`
 
@@ -86,21 +87,21 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
 
 
-### `OpenDefinitionInSideGroup: Go to Implementations`
+## `OpenDefinitionInSideGroup: Go to Implementations`
 
 **コマンドID**: `open-definition-in-side-group.openImplementationInSidePane`
 
 抽象クラスやインターフェースの実装クラスへジャンプします。
 検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
 
-### `OpenDefinitionInSideGroup: Go to References`
+## `OpenDefinitionInSideGroup: Go to References`
 
 コマンドID: `open-definition-in-side-group.openReferenceInSidePane`
 
 シンボルの参照元（使用箇所）を検索しジャンプします。
 検索結果が複数ある場合は QuickPick メニューでジャンプ先をプレビューしつつ選択できます。
 
-### `OpenDefinitionInSideGroup: Show viewColumn number`
+## `OpenDefinitionInSideGroup: Show viewColumn number`
 
 **コマンドID**: `open-definition-in-side-group.showViewColumn`
 
@@ -118,10 +119,10 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 
 本来であれば非プログラミング言語系のエディタでコンテキストメニューを開いたとき `隣で開く` サブメニューは表示されるべきではありませんが表示される状態にあります。
 
-非プログラミング言語系の場合に表示しないようにしようとするとメニューの表示・非表示が不安定になってしまう[^2]問題があるためです。
+これは非プログラミング言語系の場合に表示しないようにしようとするとメニューの表示・非表示が不安定になってしまう[^2]問題があるためです。
 
 検討した結果、使いたいときに確実に `隣で開く` が使える方がユーザーにとって有益と判断し、常に表示される仕様を選択しました。
 
 したがってこの問題は仕様です。
 
-[^2]: エディタが切り替わった直後は言語サーバーによる解析処理まで終わっていない事が多く、定義の有無が正しく返されないのが原因です。
+[^2]: エディタが切り替わった直後は言語サーバーによる解析処理が終わっておらず、定義があるのに「定義無し」が返されるケースが少なくないためです。
