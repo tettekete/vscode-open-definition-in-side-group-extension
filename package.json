@@ -23,19 +23,42 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Open Definition in Side Group", 
-      "properties": {
-        "open-definition-in-side-group.allowViewColumns": {
-          "type": "string",
-          "description": "A list of tab group numbers allowed to display definitions.",
-          "default": "1,2,3",
-          "pattern": "[1-9](?:,[1-9]+)*",
-          "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
+    "configuration": [
+      {
+        "title": "Semi-Automatic Mode",
+        "properties": {
+          "open-definition-in-side-group.showOpenInSideGroupMenu": {
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Displays the `Open in Side Group` submenu in the editor's context menu.\n\nWhen selecting options like `Go to Definition` from this menu, the editor group to open the definition in is automatically determined based on the group numbers specified in the `Allow View Columns` configuration."
+          },
+          "open-definition-in-side-group.allowViewColumns": {
+            "type": "string",
+            "description": "A list of tab group numbers allowed to display definitions.",
+            "default": "1,2,3",
+            "pattern": "[1-9](?:,[1-9]+)*",
+            "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
+          }
+        }
+      },
+      {
+        "title": "Manual Selection Mode",
+        "properties": {
+          "open-definition-in-side-group.showOpenWithGroupNoMenu": {
+            "title": "Show Open With Group No. Menu",
+            "type": "boolean",
+            "default": false,
+            "markdownDescription":"Displays the `Open with Group No.` submenu in the editor's context menu.\n\nWhen selecting options like `Go to Definition` from this menu, you can specify the editor group number to open the definition in via a submenu."
+          },
+          "open-definition-in-side-group.showCurrentGroupInManualMode": {
+            "title": "Show Current Editor Group in Manual Mode",
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Determines whether the current editor group is included as an option when selecting a target group in `Open with Group No.` mode"
+          }
         }
       }
-    },
+    ],
     "commands": [
       {
         "command": "open-definition-in-side-group.openDefinitionInSidePane",
