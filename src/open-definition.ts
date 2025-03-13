@@ -11,7 +11,10 @@ import { HightLightBox } from './lib/hight-light-box';
 import type { LocationOrLocationLink } from './lib/location-or-location-link';
 import { getUriRangeFromLocationOrLocationLink } from './lib/location-or-location-link';
 import path from 'node:path';
+import type { UriRangeRec } from './types';
 
+
+interface RefQuicPickItem extends vscode.QuickPickItem , UriRangeRec {}
 
 export async function openDefinitionInSidePane( providerCommand: ValidProviderCommands ):Promise<boolean>
 {
@@ -30,50 +33,73 @@ export async function openDefinitionInSidePane( providerCommand: ValidProviderCo
 	}
 
 	const targetViewColumn = getViewColumnForOpen();
-	let openedViewColumn = targetViewColumn;
+	let viewColumnToOpenIn = targetViewColumn;
 	if( targetViewColumn === vscode.ViewColumn.Beside )
 	{
-		openedViewColumn = ((vscode.window.tabGroups.activeTabGroup.viewColumn - 1) % 8) + 1;
+		viewColumnToOpenIn = ((vscode.window.tabGroups.activeTabGroup.viewColumn - 1) % 8) + 1;
 	}
 
 	if( locations.length > 1 )
 	{
-		navigateWithQuickPick({ locations ,viewColumn: openedViewColumn });
+		navigateWithQuickPick({ locations ,viewColumn: viewColumnToOpenIn });
 		return true;
 	}
 	
-	const r = getUriRangeFromLocationOrLocationLink( locations[0] );
-	let theUri: vscode.Uri = r.uri;
-	let theRange: vscode.Range = r.range;
-
-	const cursorPosRange = new vscode.Range( theRange.start, theRange.start );
-	await vscode.window.showTextDocument(
-		theUri,
-		{
-			viewColumn: targetViewColumn,
-			selection: cursorPosRange,
-		}
-	);
-
-	// Scroll to definition pos
-	const defineEditor = getActiveTextEditorForTabGroup( openedViewColumn );
-	if( defineEditor )
-	{
-		// Show HightLightBox
-		HightLightBox.show({
-			editor: defineEditor,
-			range: theRange
-		});
-	}
+	const uriRange = getUriRangeFromLocationOrLocationLink( locations[0] );
+	
+	previewLocation( viewColumnToOpenIn, uriRange );
 
 	return true;
 }
 
-interface RefQuicPickItem extends vscode.QuickPickItem
+export async function openDefinitionWithViewNo( 
+	{
+		providerCommand,
+		viewNo
+	}:
+	{
+		providerCommand: ValidProviderCommands;
+		viewNo: vscode.ViewColumn;
+	}
+):Promise<boolean>
 {
-	uri: vscode.Uri
-	range: vscode.Range
+	const editor = vscode.window.activeTextEditor;
+	if( !editor ){ return false; }
+
+	// viewNo が現在開かれている最大のタググループ番号より大きい場合 vscode.ViewColumn.Beside にする
+	const maxViewColum = Math.max( ... vscode.window.tabGroups.all.map((item) => { return item.viewColumn; } ) );
+	let viewColumnToOpenIn:vscode.ViewColumn = viewNo;
+	if( viewNo > maxViewColum || viewNo <= 0 )
+	{
+		viewColumnToOpenIn = vscode.ViewColumn.Beside;
+	}
+
+	// 定義の位置を取得
+	const locations: LocationOrLocationLink[] | undefined = await vscode.commands.executeCommand(
+		providerCommand,
+		editor.document.uri,
+		editor.selection.active
+	);
+
+	if( ! locations || locations.length <= 0 ) { return false; }
+	
+	// 移動先が複数ある場合 QuickPick でプレビューとナビゲーションを行う
+	if( locations.length > 1 )
+	{
+		navigateWithQuickPick({ locations ,viewColumn: viewColumnToOpenIn });
+		return true;
+	}
+
+	// go to definition
+	const uriRange = getUriRangeFromLocationOrLocationLink( locations[0] );
+	
+	previewLocation( viewColumnToOpenIn, uriRange );
+	
+	return true;
 }
+
+
+
 
 async function navigateWithQuickPick(
 	{
@@ -153,7 +179,7 @@ async function navigateWithQuickPick(
 }
 
 
-async function previewLocation( viewColumn:vscode.ViewColumn , refQPItem: RefQuicPickItem )
+async function previewLocation( viewColumn:vscode.ViewColumn , refQPItem: RefQuicPickItem | UriRangeRec )
 {
 	const cursorRange = new vscode.Range( refQPItem.range.start , refQPItem.range.start );
 	await vscode.window.showTextDocument( refQPItem.uri ,
@@ -163,6 +189,11 @@ async function previewLocation( viewColumn:vscode.ViewColumn , refQPItem: RefQui
 		preview: true,
 		preserveFocus: true
 	});
+
+	if( viewColumn === vscode.ViewColumn.Beside )
+	{
+		viewColumn = Math.max( ... vscode.window.tabGroups.all.map((item) => { return item.viewColumn; } ) );
+	}
 
 	const defineEditor = getActiveTextEditorForTabGroup( viewColumn );
 	if( defineEditor )
