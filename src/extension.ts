@@ -160,9 +160,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const onDidChangeVisibleTextEditors = vscode.window.onDidChangeVisibleTextEditors(( editors )=>
 		{
-			console.debug(`## onDidChangeVisibleTextEditors occurred. viewColumn: ${editors.map( e=>e.viewColumn ).join(',')}`);
-
-			// updateContextOfDisplayedViewColumns( editors );
 			setTimeout(()=>
 				{
 					updateContextOfDisplayedViewColumns();
@@ -217,59 +214,22 @@ function updateContextOfDisplayedViewColumns( editors?: readonly vscode.TextEdit
 {
 	const displayedGroupSet:Set<number> = new Set<number>();
 
-	// if( editors !== undefined )
-	// {
-	// 	editors.forEach( (editor) =>
-	// 		{
-	// 			if( editor !== undefined && editor.viewColumn !== undefined )
-	// 			{
-	// 				displayedGroupSet.add( editor.viewColumn );
-	// 			}
-	// 		}
-	// 	);
-	// }
-	// else
-	{
-		// vscode.window.visibleTextEditors.forEach(( editor ) =>
-		// 	{
-		// 		if( editor.viewColumn === undefined ){ return; }
-		// 		displayedGroupSet.add( editor.viewColumn );
-		// 	}
-		// );
-		vscode.window.tabGroups.all.forEach( ( tab ) =>
+	vscode.window.tabGroups.all.forEach( ( tab ) =>
+		{
+			if( tab.viewColumn > 0 )
 			{
-				if( tab.viewColumn > 0 )
-				{
-					displayedGroupSet.add( tab.viewColumn );
-				}
+				displayedGroupSet.add( tab.viewColumn );
 			}
-		);
-	}
-
-	// let adjustedList = [...displayedGroupSet];
-	// {
-	// 	const list = [...displayedGroupSet].sort((a,b) => a-b );
-	// 	const lastIndex = list.length - 1;
-	// 	if( list[lastIndex] !== list.length )
-	// 	{
-	// 		adjustedList = [];
-	// 		for(let i=1;i<=list.length;i++)
-	// 		{
-	// 			adjustedList.push( i );
-	// 		}
-	// 	}
-	// }
-	
+		}
+	);
 
 	for( let i=1;i<=9;i++ )
 	{
 		const contextKey = `viewColumn_${i}_Opened`;
 		const isOpened = displayedGroupSet.has( i ) ? true : false;
-		// const isOpened = adjustedList.includes( i );
+
 		vscode.commands.executeCommand('setContext', contextKey, isOpened);
 	}
-
-	// console.debug(`Opened views: ${JSON.stringify([...displayedGroupSet])} -> ${adjustedList.join(',')}`);
 }
 
 function updateContextOfActiveViewColumn( editor?: vscode.TextEditor | undefined )
