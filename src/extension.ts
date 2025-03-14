@@ -158,18 +158,38 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 	
 
-	const onDidChangeVisibleTextEditors = vscode.window.onDidChangeVisibleTextEditors(()=>
+	const onDidChangeVisibleTextEditors = vscode.window.onDidChangeVisibleTextEditors(( editors )=>
 		{
-			updateContextOfDisplayedViewColumns();
+			console.debug(`## onDidChangeVisibleTextEditors occurred. viewColumn: ${editors.map( e=>e.viewColumn ).join(',')}`);
+
+			// updateContextOfDisplayedViewColumns( editors );
+			setTimeout(()=>
+				{
+					updateContextOfDisplayedViewColumns();
+				},
+				500
+			);
+
+			/*
+				Neither the editors argument, vscode.window.tabGroups.all, nor the result
+				of collecting viewColumn values via vscode.window.visibleTextEditors.forEach
+				return the correct state when a tab group is closed or when a tab is split
+				upwards using Split Up.
+
+				Various solutions were attempted, but the only effective way to work around
+				this VSCode API issue was to use setTimeout, so execution is delayed accordingly.
+			*/
+			
 		}
 	);
 
 	const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor(( editor )=>
 		{
-			console.debug(`## onDidChangeActiveTextEditor
-			- uri: ${editor ? editor.document.uri.toString() : 'undefined'}
-			- viewColumn: ${editor ? editor.viewColumn : 'undefined' }`);
+			console.debug(`## onDidChangeActiveTextEditor`);
+			console.debug(`- uri: ${editor ? editor.document.uri.toString() : 'undefined'}`);
+			console.debug(`- viewColumn: ${editor ? editor.viewColumn : 'undefined' }`);
 			updateContextOfActiveViewColumn( editor );
+			updateContextOfDisplayedViewColumns();
 		}
 	);
 
@@ -193,23 +213,63 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {}
 
-function updateContextOfDisplayedViewColumns()
+function updateContextOfDisplayedViewColumns( editors?: readonly vscode.TextEditor[] )
 {
 	const displayedGroupSet:Set<number> = new Set<number>();
-	vscode.window.tabGroups.all.forEach( ( tab ) =>
+
+	// if( editors !== undefined )
+	// {
+	// 	editors.forEach( (editor) =>
+	// 		{
+	// 			if( editor !== undefined && editor.viewColumn !== undefined )
+	// 			{
+	// 				displayedGroupSet.add( editor.viewColumn );
+	// 			}
+	// 		}
+	// 	);
+	// }
+	// else
 	{
-		if( tab.viewColumn > 0 )
-		{
-			displayedGroupSet.add( tab.viewColumn );
-		}
-	});
+		// vscode.window.visibleTextEditors.forEach(( editor ) =>
+		// 	{
+		// 		if( editor.viewColumn === undefined ){ return; }
+		// 		displayedGroupSet.add( editor.viewColumn );
+		// 	}
+		// );
+		vscode.window.tabGroups.all.forEach( ( tab ) =>
+			{
+				if( tab.viewColumn > 0 )
+				{
+					displayedGroupSet.add( tab.viewColumn );
+				}
+			}
+		);
+	}
+
+	// let adjustedList = [...displayedGroupSet];
+	// {
+	// 	const list = [...displayedGroupSet].sort((a,b) => a-b );
+	// 	const lastIndex = list.length - 1;
+	// 	if( list[lastIndex] !== list.length )
+	// 	{
+	// 		adjustedList = [];
+	// 		for(let i=1;i<=list.length;i++)
+	// 		{
+	// 			adjustedList.push( i );
+	// 		}
+	// 	}
+	// }
+	
 
 	for( let i=1;i<=9;i++ )
 	{
 		const contextKey = `viewColumn_${i}_Opened`;
 		const isOpened = displayedGroupSet.has( i ) ? true : false;
+		// const isOpened = adjustedList.includes( i );
 		vscode.commands.executeCommand('setContext', contextKey, isOpened);
 	}
+
+	// console.debug(`Opened views: ${JSON.stringify([...displayedGroupSet])} -> ${adjustedList.join(',')}`);
 }
 
 function updateContextOfActiveViewColumn( editor?: vscode.TextEditor | undefined )
