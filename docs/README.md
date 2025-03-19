@@ -5,9 +5,15 @@
 
 - [Overview](#overview)
 	- [How to Use](#how-to-use)
+		- [Automatic Mode (Default)](#automatic-mode-default)
+		- [Manual Selection Mode](#manual-selection-mode)
 - [Configuration Options](#configuration-options)
-	- [`Allow View Columns`](#allow-view-columns)
-		- [How to Check `viewColumn` Numbers](#how-to-check-viewcolumn-numbers)
+	- [Automatic Mode](#automatic-mode)
+		- [`Show Open In Side Group Menu`](#show-open-in-side-group-menu)
+		- [`Allow View Columns`](#allow-view-columns)
+	- [Manual Selection Mode](#manual-selection-mode-1)
+		- [`Show Open With Group No. Menu`](#show-open-with-group-no-menu)
+		- [`Show Current Editor Group in Manual Mode`](#show-current-editor-group-in-manual-mode)
 - [Available Commands (For Shortcut Configuration)](#available-commands-for-shortcut-configuration)
 	- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
 	- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
@@ -23,9 +29,9 @@
 
 # Overview
 
-In VSCode, built-in features like `Go to Definition` and `Go to Type Definition` open the target "Definition" within the same tab group[^1]. This can cause you to lose sight of your current code or definition.
+In VSCode, built-in features like `Go to Definition` and `Go to Type Definition` open the target "Definition" within the same editor group[^1]. This can cause you to lose sight of your current code or definition.
 
-This extension provides functionality to open "Definitions" in an adjacent tab group instead.  
+This extension provides functionality to open "Definitions" in an adjacent editor group instead.  
 
 [^1]: In this document, the term "pane" may be used interchangeably.
 
@@ -34,16 +40,43 @@ This extension provides functionality to open "Definitions" in an adjacent tab g
 
 ## How to Use
 
+This extension features two modes for determining the destination editor group when using the `Go to ...` command: an "Automatic Selection Mode," which automatically decides the editor group and is accessed via the `Open in Side Group` menu, and a "Manual Selection Mode," which allows you to specify an editor group number and is accessed via the `Open with Group No.` menu.
+
+By default, only the "Automatic Selection Mode" is enabled, but you can use the "Manual Selection Mode" exclusively or in conjunction with the automatic mode.
+
+### Automatic Mode (Default)
+
 Once installed, a submenu called `Open in Side Group` will be added to the context menu when you right-click on a function or type.
 
 Simply select `Go to Definition`, `Go to Type Definition`, or similar options from this submenu.
 
-<img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png 2x" width="420">
+<div align="center"><img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png 2x" width="420"></div>
+
+
+### Manual Selection Mode
+
+If you check `Show Open With Group No Menu` in the configuration, the `Open with Group No.` menu will specifically appear in the context menu, allowing you to manually select the editor group for opening with `Go to ...`.
+
+<div align="center"><img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/manual-selection-mode.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/manual-selection-mode.png 2x" width="517"></div>
+
+To hide the default automatic mode, uncheck the `Show Open In Side Group Menu` item in the configuration.
 
 
 # Configuration Options
 
-## `Allow View Columns`
+## Automatic Mode
+
+### `Show Open In Side Group Menu`
+
+**Config ID**: `open-definition-in-side-group.showOpenInSideGroupMenu`
+
+This checkbox specifies whether to display the `Show Open In Side Group` menu item in the context menu. The default setting is ON.
+
+The `Show Open In Side Group` menu is for the mode that automatically decides the editor group to open when using `Go to ...`. It automatically determines the destination editor group based on the group numbers allowed by the config item `Allow View Columns`.
+
+
+
+### `Allow View Columns`
 
 **Config ID:** `open-definition-in-side-group.allowViewColumns`
 
@@ -55,9 +88,30 @@ For example, if you always work in a three-pane mode and want definitions to app
 
 Alternatively, setting it to `2,3` will attempt to alternate between the second and third panes when displaying definitions.
 
-### How to Check `viewColumn` Numbers
+#### How to Check `viewColumn` Numbers
 
 You can check the `viewColumn` number of the active editor by running the command `OpenDefinitionInSideGroup: Check the viewColumn number of the active editor` from the command palette. The `viewColumn` number will be displayed in the status bar for a short period.
+
+
+## Manual Selection Mode
+
+### `Show Open With Group No. Menu`
+
+**Config ID**: `open-definition-in-side-group.showOpenWithGroupNoMenu`
+
+This checkbox determines whether to display the `Open with Group No.` menu item in the context menu. The default setting is OFF.
+
+The `Open with Group No.` menu appears as a submenu under the `Go to ...` item, allowing you to choose the editor group number where you want to open the destination.
+
+
+### `Show Current Editor Group in Manual Mode`
+
+**Config ID**: `open-definition-in-side-group.showCurrentGroupInManualMode`
+
+This checkbox specifies whether to include the current editor group number in the opening destination list when `Show Open With Group No. Menu` is ON.
+
+Since the concept of this extension is to "open definitions in the side," the default setting is OFF.
+
 
 
 # Available Commands (For Shortcut Configuration)
