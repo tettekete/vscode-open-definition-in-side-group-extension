@@ -25,14 +25,16 @@
   "contributes": {
     "configuration": [
       {
-        "title": "Semi-Automatic Mode",
+        "title": "Automatic Mode",
         "properties": {
           "open-definition-in-side-group.showOpenInSideGroupMenu": {
+            "title": "Show Open In Side Group Menu",
             "type": "boolean",
             "default": true,
             "markdownDescription": "Displays the `Open in Side Group` submenu in the editor's context menu.\n\nWhen selecting options like `Go to Definition` from this menu, the editor group to open the definition in is automatically determined based on the group numbers specified in the `Allow View Columns` configuration."
           },
           "open-definition-in-side-group.allowViewColumns": {
+            "title": "Allow View Columns",
             "type": "string",
             "description": "A list of tab group numbers allowed to display definitions.",
             "default": "1,2,3",
