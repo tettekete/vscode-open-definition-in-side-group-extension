@@ -2,7 +2,7 @@
   "name": "open-definition-in-side-group",
   "displayName": "Open Definition in Side Group",
   "description": "%extension.description%",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.97.0"
   },
@@ -23,19 +23,44 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Open Definition in Side Group", 
-      "properties": {
-        "open-definition-in-side-group.allowViewColumns": {
-          "type": "string",
-          "description": "A list of tab group numbers allowed to display definitions.",
-          "default": "1,2,3",
-          "pattern": "[1-9](?:,[1-9]+)*",
-          "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
+    "configuration": [
+      {
+        "title": "Automatic Mode",
+        "properties": {
+          "open-definition-in-side-group.showOpenInSideGroupMenu": {
+            "title": "Show Open In Side Group Menu",
+            "type": "boolean",
+            "default": true,
+            "markdownDescription": "Displays the `Open in Side Group` submenu in the editor's context menu.\n\nWhen selecting options like `Go to Definition` from this menu, the editor group to open the definition in is automatically determined based on the group numbers specified in the `Allow View Columns` configuration."
+          },
+          "open-definition-in-side-group.allowViewColumns": {
+            "title": "Allow View Columns",
+            "type": "string",
+            "description": "A list of tab group numbers allowed to display definitions.",
+            "default": "1,2,3",
+            "pattern": "[1-9](?:,[1-9]+)*",
+            "patternErrorMessage": "It must be a number from 1 to 9 or a comma-separated list of numbers from 1 to 9."
+          }
+        }
+      },
+      {
+        "title": "Manual Selection Mode",
+        "properties": {
+          "open-definition-in-side-group.showOpenWithGroupNoMenu": {
+            "title": "Show Open With Group No. Menu",
+            "type": "boolean",
+            "default": false,
+            "markdownDescription":"Displays the `Open with Group No.` submenu in the editor's context menu.\n\nWhen selecting options like `Go to Definition` from this menu, you can specify the editor group number to open the definition in via a submenu."
+          },
+          "open-definition-in-side-group.showCurrentGroupInManualMode": {
+            "title": "Show Current Editor Group in Manual Mode",
+            "type": "boolean",
+            "default": false,
+            "markdownDescription": "Determines whether the current editor group is included as an option when selecting a target group in `Open with Group No.` mode"
+          }
         }
       }
-    },
+    ],
     "commands": [
       {
         "command": "open-definition-in-side-group.openDefinitionInSidePane",
@@ -66,13 +91,254 @@
         "command": "open-definition-in-side-group.showViewColumn",
         "title": "Show viewColumn number",
         "category": "OpenDefinitionInSideGroup"
+      },
+
+
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo1",
+        "title": "Group 1",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo2",
+        "title": "Group 2",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo3",
+        "title": "Group 3",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo4",
+        "title": "Group 4",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo5",
+        "title": "Group 5",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo6",
+        "title": "Group 6",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo7",
+        "title": "Group 7",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo8",
+        "title": "Group 8",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo9",
+        "title": "Group 9",
+        "category": "OpenDefinitionInSideGroup"
+      },
+
+
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo1",
+        "title": "Group 1",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo2",
+        "title": "Group 2",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo3",
+        "title": "Group 3",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo4",
+        "title": "Group 4",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo5",
+        "title": "Group 5",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo6",
+        "title": "Group 6",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo7",
+        "title": "Group 7",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo8",
+        "title": "Group 8",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo9",
+        "title": "Group 9",
+        "category": "OpenDefinitionInSideGroup"
+      },
+
+
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo1",
+        "title": "Group 1",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo2",
+        "title": "Group 2",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo3",
+        "title": "Group 3",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo4",
+        "title": "Group 4",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo5",
+        "title": "Group 5",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo6",
+        "title": "Group 6",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo7",
+        "title": "Group 7",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo8",
+        "title": "Group 8",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo9",
+        "title": "Group 9",
+        "category": "OpenDefinitionInSideGroup"
+      },
+
+
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo1",
+        "title": "Group 1",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo2",
+        "title": "Group 2",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo3",
+        "title": "Group 3",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo4",
+        "title": "Group 4",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo5",
+        "title": "Group 5",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo6",
+        "title": "Group 6",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo7",
+        "title": "Group 7",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo8",
+        "title": "Group 8",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openImplementationWithNo9",
+        "title": "Group 9",
+        "category": "OpenDefinitionInSideGroup"
+      },
+
+
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo1",
+        "title": "Group 1",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo2",
+        "title": "Group 2",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo3",
+        "title": "Group 3",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo4",
+        "title": "Group 4",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo5",
+        "title": "Group 5",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo6",
+        "title": "Group 6",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo7",
+        "title": "Group 7",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo8",
+        "title": "Group 8",
+        "category": "OpenDefinitionInSideGroup"
+      },
+      {
+        "command": "tettekete.open-definition-in-side-group.openReferenceWithNo9",
+        "title": "Group 9",
+        "category": "OpenDefinitionInSideGroup"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "submenu": "open-definition-in-side-group.editor-context.submenu",
-          "group": "navigation"
+          "group": "navigation",
+          "when": "config.open-definition-in-side-group.showOpenInSideGroupMenu"
+        },
+        {
+          "submenu": "submenu.withViewNo",
+          "group": "navigation",
+          "when": "config.open-definition-in-side-group.showOpenWithGroupNoMenu"
         }
       ],
       "commandPalette": [
@@ -93,6 +359,196 @@
         },
         {
           "command": "open-definition-in-side-group.showViewColumn"
+        },
+
+
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo1",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo2",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo3",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo4",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo5",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo6",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo7",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo8",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo9",
+          "when": "false"
+        },
+
+
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo1",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo2",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo3",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo4",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo5",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo6",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo7",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo8",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo9",
+          "when": "false"
+        },
+
+
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo1",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo2",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo3",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo4",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo5",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo6",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo7",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo8",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo9",
+          "when": "false"
+        },
+
+
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo1",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo2",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo3",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo4",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo5",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo6",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo7",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo8",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo9",
+          "when": "false"
+        },
+
+
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo1",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo2",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo3",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo4",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo5",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo6",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo7",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo8",
+          "when": "false"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo9",
+          "when": "false"
         }
       ],
       "open-definition-in-side-group.editor-context.submenu":[
@@ -116,12 +572,297 @@
           "command": "open-definition-in-side-group.openReferenceInSidePane",
           "group": "order@5"
         }
+      ],
+      "submenu.withViewNo":[
+        {
+          "submenu": "submenu.openDefineWithNo",
+          "group": "order@1"
+        },
+        {
+          "submenu": "submenu.openTypeDefinitionWithNo",
+          "group": "order@2"
+        },
+        {
+          "submenu": "submenu.openDeclarationWithNo",
+          "group": "order@3"
+        },
+        {
+          "submenu": "submenu.openImplementationWithNo",
+          "group": "order@4"
+        },
+        {
+          "submenu": "submenu.openReferenceWithNo",
+          "group": "order@5"
+        }
+      ],
+      "submenu.openDefineWithNo":[
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo1",
+          "group": "order@1",
+          "when": "viewColumn_1_Opened && ! isViewColumn_1_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo2",
+          "group": "order@2",
+          "when": "(viewColumn_1_Opened || viewColumn_2_Opened) && ! isViewColumn_2_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo3",
+          "group": "order@3",
+          "when": "viewColumn_3_Opened && ! isViewColumn_3_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo4",
+          "group": "order@4",
+          "when": "viewColumn_4_Opened && ! isViewColumn_4_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo5",
+          "group": "order@5",
+          "when": "viewColumn_5_Opened && ! isViewColumn_5_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo6",
+          "group": "order@6",
+          "when": "viewColumn_6_Opened && ! isViewColumn_6_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo7",
+          "group": "order@7",
+          "when": "viewColumn_7_Opened && ! isViewColumn_7_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo8",
+          "group": "order@8",
+          "when": "viewColumn_8_Opened && ! isViewColumn_8_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDefinitionWithNo9",
+          "group": "order@9",
+          "when": "viewColumn_9_Opened && ! isViewColumn_9_Active"
+        }
+      ],
+
+      "submenu.openTypeDefinitionWithNo": [
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo1",
+          "group": "order@1",
+          "when": "viewColumn_1_Opened  && ! isViewColumn_1_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo2",
+          "group": "order@2",
+          "when": "(viewColumn_1_Opened || viewColumn_2_Opened) && ! isViewColumn_2_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo3",
+          "group": "order@3",
+          "when": "viewColumn_3_Opened && ! isViewColumn_3_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo4",
+          "group": "order@4",
+          "when": "viewColumn_4_Opened && ! isViewColumn_4_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo5",
+          "group": "order@5",
+          "when": "viewColumn_5_Opened && ! isViewColumn_5_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo6",
+          "group": "order@6",
+          "when": "viewColumn_6_Opened && ! isViewColumn_6_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo7",
+          "group": "order@7",
+          "when": "viewColumn_7_Opened && ! isViewColumn_7_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo8",
+          "group": "order@8",
+          "when": "viewColumn_8_Opened && ! isViewColumn_8_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openTypeDefinitionWithNo9",
+          "group": "order@9",
+          "when": "viewColumn_9_Opened && ! isViewColumn_9_Active"
+        }
+      ],
+
+      "submenu.openDeclarationWithNo": [
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo1",
+          "group": "order@1",
+          "when": "viewColumn_1_Opened && ! isViewColumn_1_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo2",
+          "group": "order@2",
+          "when": "(viewColumn_1_Opened || viewColumn_2_Opened) && ! isViewColumn_2_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo3",
+          "group": "order@3",
+          "when": "viewColumn_3_Opened && ! isViewColumn_3_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo4",
+          "group": "order@4",
+          "when": "viewColumn_4_Opened && ! isViewColumn_4_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo5",
+          "group": "order@5",
+          "when": "viewColumn_5_Opened && ! isViewColumn_5_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo6",
+          "group": "order@6",
+          "when": "viewColumn_6_Opened && ! isViewColumn_6_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo7",
+          "group": "order@7",
+          "when": "viewColumn_7_Opened && ! isViewColumn_7_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo8",
+          "group": "order@8",
+          "when": "viewColumn_8_Opened && ! isViewColumn_8_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openDeclarationWithNo9",
+          "group": "order@9",
+          "when": "viewColumn_9_Opened && ! isViewColumn_9_Active"
+        }
+      ],
+
+      "submenu.openImplementationWithNo": [
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo1",
+          "group": "order@1",
+          "when": "viewColumn_1_Opened && ! isViewColumn_1_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo2",
+          "group": "order@2",
+          "when": "(viewColumn_1_Opened || viewColumn_2_Opened) && ! isViewColumn_2_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo3",
+          "group": "order@3",
+          "when": "viewColumn_3_Opened && ! isViewColumn_3_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo4",
+          "group": "order@4",
+          "when": "viewColumn_4_Opened && ! isViewColumn_4_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo5",
+          "group": "order@5",
+          "when": "viewColumn_5_Opened && ! isViewColumn_5_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo6",
+          "group": "order@6",
+          "when": "viewColumn_6_Opened && ! isViewColumn_6_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo7",
+          "group": "order@7",
+          "when": "viewColumn_7_Opened && ! isViewColumn_7_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo8",
+          "group": "order@8",
+          "when": "viewColumn_8_Opened && ! isViewColumn_8_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openImplementationWithNo9",
+          "group": "order@9",
+          "when": "viewColumn_9_Opened && ! isViewColumn_9_Active"
+        }
+      ],
+
+      "submenu.openReferenceWithNo": [
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo1",
+          "group": "order@1",
+          "when": "viewColumn_1_Opened && ! isViewColumn_1_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo2",
+          "group": "order@2",
+          "when": "(viewColumn_1_Opened || viewColumn_2_Opened) && ! isViewColumn_2_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo3",
+          "group": "order@3",
+          "when": "viewColumn_3_Opened && ! isViewColumn_3_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo4",
+          "group": "order@4",
+          "when": "viewColumn_4_Opened && ! isViewColumn_4_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo5",
+          "group": "order@5",
+          "when": "viewColumn_5_Opened && ! isViewColumn_5_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo6",
+          "group": "order@6",
+          "when": "viewColumn_6_Opened && ! isViewColumn_6_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo7",
+          "group": "order@7",
+          "when": "viewColumn_7_Opened && ! isViewColumn_7_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo8",
+          "group": "order@8",
+          "when": "viewColumn_8_Opened && ! isViewColumn_8_Active"
+        },
+        {
+          "command": "tettekete.open-definition-in-side-group.openReferenceWithNo9",
+          "group": "order@9",
+          "when": "viewColumn_9_Opened && ! isViewColumn_9_Active"
+        }
       ]
     },
     "submenus": [
       {
         "id": "open-definition-in-side-group.editor-context.submenu",
         "label": "%submenus.open_in_side_group%"
+      },
+      {
+        "id": "submenu.withViewNo",
+        "label": "%submenus.open_with_group_no%"
+      },
+      {
+        "id": "submenu.openDefineWithNo",
+        "label": "%command.go_to_definition%"
+      },
+      {
+        "id": "submenu.openTypeDefinitionWithNo",
+        "label": "%command.go_to_type_definition%"
+      },
+      {
+        "id": "submenu.openDeclarationWithNo",
+        "label": "%command.go_to_source_definition%"
+      },
+      {
+        "id": "submenu.openImplementationWithNo",
+        "label": "%command.go_to_implementations%"
+      },
+      {
+        "id": "submenu.openReferenceWithNo",
+        "label": "%command.go_to_references%"
       }
     ]
   },

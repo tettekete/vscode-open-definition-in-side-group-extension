@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import type { UriRangeRec } from '../types';
 
 export type LocationOrLocationLink = vscode.Location | vscode.LocationLink;
 
@@ -16,10 +17,7 @@ export function isVSCLocationLink( location: LocationOrLocationLink ): location 
 
 
 export function getUriRangeFromLocationOrLocationLink( location:LocationOrLocationLink )
-:{
-	uri: vscode.Uri;
-	range: vscode.Range;
-}
+:UriRangeRec
 {
 	let uri: vscode.Uri;
 	let range: vscode.Range;

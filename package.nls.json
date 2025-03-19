@@ -6,5 +6,6 @@
 	"command.go_to_references": "Go to References",
 	"command.show_view_column_number": "Check the viewColumn number of the active editor",
 	"submenus.open_in_side_group": "Open in Side Group",
+	"submenus.open_with_group_no": "Open with Group No.",
 	"extension.description": "This extension provides menu commands such as \"Go to Definition\" and \"Go to Type Definition\" to open items in the adjacent tab group."
 }

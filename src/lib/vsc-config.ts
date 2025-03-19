@@ -7,7 +7,7 @@ export class VSCConfig
 
 
 	// - - - - - - - - - - - - - - - - - - - -
-	// dialogOnExecRestore<boolean>
+	// allowViewColumns: number[]
 	// - - - - - - - - - - - - - - - - - - - -
 	static allowViewColumns( fallback?: number[] ):number[]
 	{
@@ -48,6 +48,21 @@ export class VSCConfig
 
 		return _fallback;
 		
+	}
+
+
+	static showCurrentGroupInManualMode( fallback: boolean = false ): boolean
+	{
+		const config	= VSCConfig._booleanConfig(
+							'open-definition-in-side-group.showCurrentGroupInManualMode'
+						);
+
+		if( config === undefined )
+		{
+			return fallback;
+		}
+
+		return config;
 	}
 
 	static _stringConfig( configName: string , fallback?: string ):string | undefined

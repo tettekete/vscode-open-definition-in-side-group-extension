@@ -5,9 +5,15 @@
 
 - [概要](#概要)
 	- [使用方法](#使用方法)
+		- [自動選択モード（デフォルト）](#自動選択モードデフォルト)
+		- [手動選択モード](#手動選択モード)
 - [コンフィグ項目](#コンフィグ項目)
-	- [`Allow View Columns`](#allow-view-columns)
-		- [`viewColumn` 番号の確認方法](#viewcolumn-番号の確認方法)
+	- [Automatic Mode](#automatic-mode)
+		- [`Show Open In Side Group Menu`](#show-open-in-side-group-menu)
+		- [`Allow View Columns`](#allow-view-columns)
+	- [Manual Selection Mode](#manual-selection-mode)
+		- [`Show Open With Group No. Menu`](#show-open-with-group-no-menu)
+		- [`Show Current Editor Group in Manual Mode`](#show-current-editor-group-in-manual-mode)
 - [利用可能なコマンド(ショートカット設定向け)](#利用可能なコマンドショートカット設定向け)
 	- [`OpenDefinitionInSideGroup: Go to Definition`](#opendefinitioninsidegroup-go-to-definition)
 	- [`OpenDefinitionInSideGroup: Go to Type Definition`](#opendefinitioninsidegroup-go-to-type-definition)
@@ -23,9 +29,9 @@
 
 # 概要
 
-VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタググループ[^1]内で対象の「定義」を開いてしまうため、今見ている自分のコードや定義が見えなくなってしまいます。
+VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じエディタグループ[^1]内で対象の「定義」を開いてしまうため、今見ている自分のコードや定義が見えなくなってしまいます。
 
-本機能拡張は「隣」のタググループで「定義」を開くための機能拡張です。
+本機能拡張は「隣」のエディタグループで「定義」を開くための機能拡張です。
 
 [^1]: 本ドキュメントでは単にペインと呼ぶ場合があります。
 
@@ -35,18 +41,47 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 
 ## 使用方法
 
+本機能拡張には `... へ移動` で開く先のエディタグループを自動で決定する「自動選択モード」とエディタグループ番号を指定することが出来る「手動選択モード」が用意されています。
+
+デフォルトでは「自動選択モード」のみが有効ですが「手動選択モード」のみを使うことも併用することも出来ます。
+
+
+### 自動選択モード（デフォルト）
+
 インストールすると関数や型の上で開いたコンテキストメニューにサブメニュー `隣で開く` が追加されます。
 
 あとはその中の `定義へ移動` や `型定義へ移動` などを選ぶだけです。
 
-<img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png 2x" width="420">
+<div align="center"><img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/sub-menu.png 2x" width="420"></div>
+
+
+
+### 手動選択モード
+
+コンフィグの `Show Open With Group No Menu` をチェックすると `... へ移動` で開く先のエディタグループを指定出来るメニュー `グループを指定して開く` が現れます。
+
+<div align="center"><img src="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/manual-selection-mode.png" srcset="https://tettekete.github.io/vscode-open-definition-in-side-group-extension/images/manual-selection-mode.png 2x" width="517"></div>
+
+デフォルトのオートモードを表示しないようにするにはコンフィグの `Show Open In Side Group Menu` 項目のチェックを外してください。
+
 
 
 # コンフィグ項目
 
-## `Allow View Columns`
+## Automatic Mode
 
-コンフィグID: `open-definition-in-side-group.allowViewColumns`
+### `Show Open In Side Group Menu`
+
+**コンフィグID**: `open-definition-in-side-group.showOpenInSideGroupMenu`
+
+コンテキストメニューに `Show Open In Side Group`  メニュー項目を表示するかどうかを指定するためのチェックボックスです。
+
+`Show Open In Side Group`  メニューは `... へ移動` で開く先のエディタグループを自動で決定するモードのメニューです。コンフィグ項目 `Allow View Columns` で許可されたエディタグループ番号から自動的に開き先を決定します。
+
+
+### `Allow View Columns`
+
+**コンフィグID**: `open-definition-in-side-group.allowViewColumns`
 
 定義等の表示先として許可する `viewColumn` 番号をカンマ区切りで設定します。
 
@@ -57,9 +92,32 @@ VSCode 標準の `定義へ移動`や `型定義へ移動` などは同じタグ
 あるいは `2,3` と指定すれば、可能な限り 2 番目と 3 番目のペインで交互に表示します。
 
 
-### `viewColumn` 番号の確認方法
+#### `viewColumn` 番号の確認方法
 
 コマンドパレットで `OpenDefinitionInSideGroup: Check the viewColumn number of the active editor` を選ぶとステータスバーにアクティブなエディターの `viewColumn` 番号を一定時間表示します。
+
+
+## Manual Selection Mode
+
+### `Show Open With Group No. Menu`
+
+**コンフィグID**: `open-definition-in-side-group.showOpenWithGroupNoMenu`
+
+
+コンテキストメニューに `グループを指定して開く`  メニュー項目を表示するかどうかを指定するためのチェックボックスです。デフォルトは OFF です。
+
+`グループを指定して開く`  メニューは `... へ移動` 項目がサブメニューを持っており、開き先のエディタグループ番号を選ぶ事ができます。
+
+
+
+### `Show Current Editor Group in Manual Mode`
+
+**コンフィグID**: `open-definition-in-side-group.showCurrentGroupInManualMode`
+
+`Show Open With Group No. Menu` が ON の時、カレントのエディタグループ番号を開き先リストに含めるかどうかを指定するチェックボックスです。
+
+この機能拡張のコンセプトが「定義を隣で開く」なのでデフォルトは OFF です。
+
 
 
 # 利用可能なコマンド(ショートカット設定向け)
