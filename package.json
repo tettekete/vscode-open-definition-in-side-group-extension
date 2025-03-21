@@ -2,9 +2,9 @@
   "name": "open-definition-in-side-group",
   "displayName": "Open Definition in Side Group",
   "description": "%extension.description%",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
@@ -878,7 +878,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.97.0",
+    "@types/vscode": "1.96.0",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^8.10.0",

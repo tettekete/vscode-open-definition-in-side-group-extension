@@ -182,9 +182,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor(( editor )=>
 		{
-			console.debug(`## onDidChangeActiveTextEditor`);
-			console.debug(`- uri: ${editor ? editor.document.uri.toString() : 'undefined'}`);
-			console.debug(`- viewColumn: ${editor ? editor.viewColumn : 'undefined' }`);
 			updateContextOfActiveViewColumn( editor );
 			updateContextOfDisplayedViewColumns();
 		}
@@ -241,8 +238,6 @@ function updateContextOfActiveViewColumn( editor?: vscode.TextEditor | undefined
 	}
 
 	const showCurrentGroupInManualMode =  VSCConfig.showCurrentGroupInManualMode();
-
-	console.debug(`activeViewColumn: ${activeViewColumn}`);
 
 	for( let i=1;i<=9;i++ )
 	{

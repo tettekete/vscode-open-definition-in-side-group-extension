@@ -7,5 +7,5 @@
 	"command.show_view_column_number": "アクティブエディタの viewColumn 番号を確認する",
 	"submenus.open_in_side_group": "隣で開く",
 	"submenus.open_with_group_no": "グループを指定して開く",
-	"extension.description": "「定義へ移動」や「型定義へ移」などを異なるタググループで開くためのメニューアイテムを提供する機能拡張です。"
+	"extension.description": "「定義へ移動」や「型定義へ移動」などを異なるタググループで開くためのメニューアイテムを提供する機能拡張です。"
 }
