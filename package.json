@@ -2,7 +2,7 @@
   "name": "open-definition-in-side-group",
   "displayName": "Open Definition in Side Group",
   "description": "%extension.description%",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -332,12 +332,12 @@
       "editor/context": [
         {
           "submenu": "open-definition-in-side-group.editor-context.submenu",
-          "group": "navigation",
+          "group": "navigation@90",
           "when": "config.open-definition-in-side-group.showOpenInSideGroupMenu"
         },
         {
           "submenu": "submenu.withViewNo",
-          "group": "navigation",
+          "group": "navigation@91",
           "when": "config.open-definition-in-side-group.showOpenWithGroupNoMenu"
         }
       ],
