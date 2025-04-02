@@ -332,12 +332,12 @@
       "editor/context": [
         {
           "submenu": "open-definition-in-side-group.editor-context.submenu",
-          "group": "navigation",
+          "group": "navigation@90",
           "when": "config.open-definition-in-side-group.showOpenInSideGroupMenu"
         },
         {
           "submenu": "submenu.withViewNo",
-          "group": "navigation",
+          "group": "navigation@91",
           "when": "config.open-definition-in-side-group.showOpenWithGroupNoMenu"
         }
       ],

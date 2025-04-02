@@ -36,7 +36,7 @@ export async function openDefinitionInSidePane( providerCommand: ValidProviderCo
 	let viewColumnToOpenIn = targetViewColumn;
 	if( targetViewColumn === vscode.ViewColumn.Beside )
 	{
-		viewColumnToOpenIn = ((vscode.window.tabGroups.activeTabGroup.viewColumn - 1) % 8) + 1;
+		viewColumnToOpenIn = ((vscode.window.tabGroups.activeTabGroup.viewColumn - 1) % 8) + 2;
 	}
 
 	if( locations.length > 1 )
