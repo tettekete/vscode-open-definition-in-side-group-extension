@@ -24,6 +24,7 @@
 - [Known Issues](#known-issues)
 	- [Behavior of `Go to Source Definition`](#behavior-of-go-to-source-definition)
 	- [`Open in Side Group` Submenu Appearing in Non-Programming Languages](#open-in-side-group-submenu-appearing-in-non-programming-languages)
+- [Bug Reports and Feature Requests](#bug-reports-and-feature-requests)
 
 ---
 
@@ -177,3 +178,9 @@ After considering the trade-offs, we decided that ensuring the `Open in Side Gro
 Thus, this behavior is intentional and considered part of the extension's design.
 
 [^2]: This is because, immediately after the editor has been switched, the analysis process by the language server has not yet finished, and in many cases, "no definition" is returned even though there is a definition.
+
+
+# Bug Reports and Feature Requests
+
+If you encounter any bugs or have any suggestions, please let us know by [submitting an issue on our GitHub page](https://github.com/tettekete/vscode-open-definition-in-side-group-extension/issues).
+
